@@ -1,0 +1,1 @@
+include ':app', ':LibLBS', ':LibBaidu', ':LibGaode', ':baidujar'

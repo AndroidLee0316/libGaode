@@ -1,0 +1,59 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 28
+
+
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    sourceSets {
+        main {
+            jniLibs.srcDir 'libs'
+            jni.srcDirs = [] // disable automatic ndk-build
+            res.srcDirs += 'src/main/res-theme'
+        }
+    }
+
+}
+
+dependencies {
+    api fileTree(include: ['*.jar'], dir: 'libs')
+
+//    if (isMavenBuild == 'false') {
+        api project(':LibLBS')
+//    } else {
+//        api "com.pasc.lib:lbs:${rootProject.ext.aarVersionLibLBS}"
+//    }
+
+//    api "com.pasc.lib:baiduJar:${rootProject.ext.aarVersionBaiduJar}"
+}
+
+
+// 发布maven配置
+apply plugin: 'maven'
+uploadArchives{
+    repositories.mavenDeployer{
+        pom.groupId = "com.zxs.lib"// 唯一标识（通常为模块包名，也可以任意）
+        pom.artifactId = "lbs-baidu" // 项目名称（通常为类库模块名称，也可以任意）
+        pom.version = "1.0.0" // 版本号
+        // 配置本地仓库路径，项目根目录下的repository目录中
+        repository(url: uri('E:/zxsCode/maven'))
+    }
+}

@@ -1,0 +1,64 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 28
+
+
+
+    defaultConfig {
+        minSdkVersion 15
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    sourceSets {
+        main {
+            res.srcDirs += 'src/main/res-theme'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    api "com.zxs.lib:search:1.0.0"
+    if (isMavenBuild == 'false') {
+        api project(':LibLBS')
+    } else {
+        api "com.zxs.lib:lbs:1.0.0"
+    }
+//    api'com.amap.api.services.core:5.6.0'
+//    compileOnly files('libs/AMap_Location_V5.4.0_20210723.jar')
+
+    implementation files('libs/AMap3DMap_10.0.900_AMapSearch_9.7.3_AMapLocation_6.4.7_20240816.jar')
+}
+// 发布maven配置
+apply plugin: 'maven'
+uploadArchives{
+    repositories.mavenDeployer{
+        pom.groupId = "com.zxs.lib"// 唯一标识（通常为模块包名，也可以任意）
+        pom.artifactId = "lbs-gaode" // 项目名称（通常为类库模块名称，也可以任意）
+        pom.version = "1.0.0" // 版本号
+        // 配置本地仓库路径，项目根目录下的repository目录中
+        repository(url: uri('E:/zxsCode/maven'))
+    }
+}

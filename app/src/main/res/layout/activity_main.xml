@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/location_even"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"/>
+
+    <TextView
+        android:id="@+id/location_text_once"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:background="#10000000"
+        app:layout_constraintTop_toBottomOf="@id/location_even"
+        android:padding="10dp" />
+
+    <Button
+        android:id="@+id/once_location_bt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="单次定位"
+        app:layout_constraintTop_toBottomOf="@id/location_text_once" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+    <TextView
+        android:id="@+id/location_text_more"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:background="#10000000"
+        android:padding="10dp"
+        app:layout_constraintTop_toBottomOf="@id/once_location_bt"/>
+
+    <EditText
+        android:id="@+id/scancpan_et"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:hint="定位频率(毫秒)"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:layout_marginRight="20dp"
+        app:layout_constraintEnd_toStartOf="@id/guideline"
+        app:layout_constraintTop_toBottomOf="@id/location_text_more" />
+
+    <Button
+        android:id="@+id/more_location_bt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:text="持续性定位 1"
+        android:layout_marginLeft="20dp"
+        app:layout_constraintStart_toEndOf="@id/guideline"
+        app:layout_constraintTop_toBottomOf="@id/location_text_more" />
+
+
+    <TextView
+        android:id="@+id/location_tip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="30dp"
+        android:paddingLeft="10dp"
+        app:layout_constraintTop_toBottomOf="@id/more_location_bt"
+        android:text="切换环境，重启后生效"
+        />
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/location_tip"
+        android:orientation="horizontal"
+        >
+        <RadioButton
+            android:id="@+id/baidu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:checked="true"
+            android:text="百度"
+            />
+        <RadioButton
+            android:id="@+id/gaode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginLeft="50dp"
+            android:checked="false"
+            android:text="高德"
+            />
+    </RadioGroup>
+
+    <com.baidu.mapapi.map.TextureMapView
+        android:id="@+id/nearby_search_map_view"
+        android:layout_width="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="200dp"
+        />
+
+</android.support.constraint.ConstraintLayout>
